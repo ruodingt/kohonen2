@@ -20,6 +20,25 @@ _C.LOG_DIR = 'logs'
 
 
 def configurable(init_fn, *, from_config=None):
+    """
+    make class A configurable
+    assuming you have:
+
+    class A:
+    @configurable
+    def __init__(a=0, b=1):
+        pass
+
+    @classmethod
+    def from_config(cls, cfg):
+        return dict(a=cfg.A, b=cfg.B)
+
+    Then you may do A(cfg)
+
+    :param init_fn:
+    :param from_config:
+    :return:
+    """
     def wrap(self, *args, **kwargs):
         _cfg = [c for c in args if isinstance(c, CN)]
         if _cfg:

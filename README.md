@@ -8,8 +8,14 @@ Please see [kohonen.ipynb](kohonen.ipynb) for the show case
 # Run Demo (for fun)
 ```
 docker build -t kohonen2 .
-docker run -p 8888:8888 kohonen2 
+docker run -p 8887:8888 kohonen2 jupyter notebook --ip 0.0.0.0 --allow-root
 ```
+
+Or you can use docker-compose, which also mount current folder 
+```bash
+docker-compose up
+```
+Then you may find your vlogs under `./logs2`
 
 # Run training (for big/serious job)
 ## with container
@@ -42,7 +48,7 @@ Trainer is the coordinator of the entire training job.
 3. **cli interface (easy, lazy)**: see section *Run training* above, useless but fun
 4. **vlog system (Visibility makes models more explainable)**: take a photo of current weight 
 every N steps (defined as `cfg.CALLBACK_PERIOD`). 
-[Vlog](ksom/hooks.py) output is saved to `project_root/logs/${exp_name}`
+[Vlog](ksom/hooks.py) output is saved to `kohonen2/logs/${exp_name}`
 exp_name is same as `.yaml` config filename
 
 ```

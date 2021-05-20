@@ -1,0 +1,15 @@
+version: "2.3"
+services:
+  kohonen2:
+    restart: always
+    build: # define the image / build for the container
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./logs2:/kohonen2/logs:rw # mount host machine folder in docker file system - host_dir: container_dir: (rw/ro)
+    ports: # port forwarding - host_port:internal_docker_port
+      - '8887:8888'
+    command: jupyter notebook --ip 0.0.0.0 --allow-root
+
+
+
