@@ -37,19 +37,33 @@ If config_file is not provided it will use default configuration
 
 # Design Thinking
 
-For simplicity this project is mainly using `numpy`
+For simplicity this project is mainly using `numpy`. 
+Other dependencies are for the purpose of logging, configuration, cli tools etc.
 
 ## Feature Summary:
-1. **experiment as yaml**: all the experiment configs should goes here
-2. **Modular design**: 3 major module - [Trainer](ksom/trainer.py), Model & Dataset.
-Trainer is the coordinator of the entire training job.
+1. **experiment as yaml**: all the experiment configs (hparams etc.) should goes here, 
+such that we can always use yaml to reproduce experiments.
+
+2. **Modular design**: 5 major module - [Trainer](ksom/trainer.py), 
+[Model](ksom/kohonensom_model.py), [config](ksom/config.py) 
+, [Dataset](ksom/dataset.py) & [hooks](ksom/hooks.py).
+Trainer is the coordinator of the entire training job 
+and interact with other modules like hooks.
+
 3. **extensible**: Modules are highly extensive - one may extend their own CustomDataset based on `Dataset` 
-(see [dataset.py](ksom/dataset.py)); one may also extend `Hook` ()
-3. **cli interface (easy, lazy)**: see section *Run training* above, useless but fun
-4. **vlog system (Visibility makes models more explainable)**: take a photo of current weight 
+(see [dataset.py](ksom/dataset.py)); one may also extend `Hook` to build a checkpointor which dump checkpoint 
+every N steps
+
+4. **cli interface (easy, lazy)**: see section *Run training* above
+
+5. **vlog system (Visibility makes models more explainable)**: take a photo of current weight 
 every N steps (defined as `cfg.CALLBACK_PERIOD`). 
 [Vlog](ksom/hooks.py) output is saved to `kohonen2/logs/${exp_name}`
-exp_name is same as `.yaml` config filename
+exp_name is same as `.yaml` config filename. 
+Each experiment will produce a vlog.gif to visualise the training process. 
+Given that SOM does not really have a loss function to monitor the training, 
+visualise the weights at different stages would be a good alternative for 
+training monitoring.
 
 ```
 |---configs: containing yaml file for different experiment settings
@@ -74,7 +88,6 @@ exp_name is same as `.yaml` config filename
 # Coming soon
 - Test & CI
 - Periodic Checkpoint Manager (as a Hook)
-- attach volume such that logs can be saved in a directory that host can access
 
 # Contact
 [Rod (Ruoding) Tian](https://github.com/ruodingt)
