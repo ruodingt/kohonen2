@@ -88,6 +88,7 @@ training monitoring.
 # Coming soon
 - Test & CI
 - Periodic Checkpoint Manager (as a Hook)
+- docker mount make host file read-only, need to sort out
 
 # Contact
 [Rod (Ruoding) Tian](https://github.com/ruodingt)
