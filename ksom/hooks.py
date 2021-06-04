@@ -39,3 +39,4 @@ class VisualLogHook(Hook):
             for filename in filenames:
                 image = imageio.imread(filename)
                 writer.append_data(image)
+

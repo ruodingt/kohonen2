@@ -6,13 +6,20 @@ from ksom.hooks import VisualLogHook
 from ksom.kohonensom_model import KohonenSOM
 from ksom.logger import setup_logger
 
+class ModelX:
+    def __init__(self):
+        self.global_step = 0
+
+    def run_step(self):
+        pass
+
 
 class Trainer:
-    def __init__(self, cfg):
+    def __init__(self, cfg, model):
         self.checkpoint_dir = None
         self.max_iter = cfg.MAX_ITER
         self.start_iter = 0
-        self.model = KohonenSOM(cfg)
+        # self.model = KohonenSOM(cfg)
         self.data_iter = iter(Dataset(length=cfg.DATA.LENGTH, d=cfg.DATA.DIM, batch_size=cfg.DATA.BATCH_SIZE))
         self.callback_period = cfg.CALLBACK_PERIOD
         self.video_buffer = []
@@ -36,10 +43,16 @@ class Trainer:
             h.after_train(self.model)
 
     def train(self):
+        """
+
+        :return:
+        """
         t0 = time.perf_counter()
         for self.model.global_step in range(self.start_iter, self.max_iter):
             self.before_step()
+
             self.run_step()
+
             self.after_step()
         t1 = time.perf_counter()
         self.logger.info(f"Training completed within: {t1-t0}s")
