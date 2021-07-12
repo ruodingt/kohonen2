@@ -81,20 +81,4 @@ training monitoring.
 ```
 
 # Acknowledgement & Reference
-- Thanks [@Eliiza](https://eliiza.com.au/) for providing the instruction.
 - There are many good implementation of SOM on the Internet. e.g. [[1]](https://medium.com/kirey-group/self-organizing-maps-with-fast-ai-step-1-implementing-a-som-with-pytorch-80df2216ede3)
-
-
-# Coming soon
-- Test & CI
-- Periodic Checkpoint Manager (as a Hook)
-- docker mount make host file read-only, need to sort out
-
-# Contact
-[Rod (Ruoding) Tian](https://github.com/ruodingt)
-
-ruodingt@gmail.com
-
-+61 422755619
-
-[LinkedIn](https://www.linkedin.com/in/ruodingt-tian/)
